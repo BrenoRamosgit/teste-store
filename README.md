@@ -20,3 +20,4 @@ Como um desenvolvedor Back-End na Stoom uma das maiores responsabilidades que vo
 - Boas práticas, legibilidade, testes e performance são alguns dos pontos que serão considerados durante a avaliação
 
 **Boa sorte!**
+# teste-store
