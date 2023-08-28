@@ -18,19 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.stoom.store.TestSecurityConfig.WithMockCustomUser;
 import br.com.stoom.store.builder.MockCategoryBuilder;
 import br.com.stoom.store.business.CategoryBO;
 import br.com.stoom.store.dto.request.CategoryRequest;
 import br.com.stoom.store.dto.response.CategoryResponse;
 
 @WebMvcTest(CategoryController.class)
-@WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
+@WithMockUser(username = "user", password = "password", roles = "ADMIN_TEST")
 public class CategoryControllerTest {
 
  @Autowired

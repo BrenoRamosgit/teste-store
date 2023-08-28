@@ -19,18 +19,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.stoom.store.TestSecurityConfig.WithMockCustomUser;
 import br.com.stoom.store.builder.MockProductBuilder;
 import br.com.stoom.store.business.ProductBO;
 import br.com.stoom.store.dto.request.ProductRequest;
 import br.com.stoom.store.dto.response.ProductResponse;
 
 @WebMvcTest(ProductController.class)
+@WithMockUser(username = "user", password = "password", roles = "ADMIN_TEST")
 public class ProductControllerTest {
 
  @Autowired
@@ -58,7 +59,6 @@ public class ProductControllerTest {
  }
  
 	 @Test
-	 @WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
 	 public void testFindAll() throws Exception {
 	     when(productService.findAll()).thenReturn(productResponseList);
 	
@@ -72,7 +72,6 @@ public class ProductControllerTest {
 	 }
 	 
 	 @Test
-	 @WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
 	 public void testFindProductById() throws Exception {
 	     Long productId = 1L;
 	     
@@ -87,7 +86,6 @@ public class ProductControllerTest {
 	 }
 	 
 	 @Test
-	 @WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
 	 public void testDeleteProduct() throws Exception {
 	     Long productId = 1L;
 
@@ -101,7 +99,6 @@ public class ProductControllerTest {
 	 }
 	 
 	 @Test
-	 @WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
 	 public void testCreateProduct() throws Exception {
 	  
 		 when(productService.create(request)).thenReturn(productResponse);
@@ -117,7 +114,6 @@ public class ProductControllerTest {
 	 }
 	 
 	 @Test
-	 @WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
 	 public void testUpdateProductStatus() throws Exception {
 	     Long productId = 1L;
 	     boolean newStatus = true;
@@ -133,7 +129,6 @@ public class ProductControllerTest {
 	 }
 	 
 	@Test
-	@WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
     public void testGetProductsByCategory() throws Exception {
         Long categoryId = 1L;
       
@@ -147,7 +142,6 @@ public class ProductControllerTest {
     }
 
 	@Test
-    @WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
     public void testGetProductsByBrand() throws Exception {
         Long brandId = 1L;
 
@@ -162,7 +156,6 @@ public class ProductControllerTest {
 	
 	
 	@Test
-	@WithMockCustomUser(username = "user", password = "password", roles = "ADMIN_TEST")
     public void testUpdateProduct() throws Exception {
         Long productId = 1L;
 
