@@ -1,8 +1,8 @@
 package br.com.stoom.store.model;
 
-import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
@@ -25,8 +27,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Table(name = "product")
+@EqualsAndHashCode(callSuper = false)
 @Entity
-public class Product implements Serializable {
+public class Product  extends NewBaseModel<Product> {
 	
     private static final long serialVersionUID = -4123046099548754532L;
 
@@ -56,9 +59,8 @@ public class Product implements Serializable {
     @JoinColumn(name = "brand_id",  referencedColumnName = "id")
     private Brand brand;
 
-   
-   // @Column(name = "price")
-   // private Price price;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ProductVariation> variations;
 
     @Column(name = "active")
     @Builder.Default

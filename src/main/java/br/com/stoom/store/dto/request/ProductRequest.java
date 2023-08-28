@@ -19,14 +19,13 @@ public class ProductRequest {
     private String name;
 
     private String description;
-
  
     private List<GenericRequest> categories;
 
     private GenericRequest brand;
-
-    private PriceRequest price;
     
+    private List<ProductVariationRequest> variations;
+
 	private Boolean active;
 
 }

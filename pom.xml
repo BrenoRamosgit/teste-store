@@ -9,11 +9,11 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath />
 	</parent>
-	<groupId>br.com.stoom</groupId>
-	<artifactId>store</artifactId>
-	<version>1.0</version>
-	<name>store</name>
-	<description> Store Test</description>
+	  <groupId>br.com.stoom</groupId>
+    <artifactId>store</artifactId>
+    <version>1.0</version>
+    <name>stoom-store</name>
+    <description>Stoom Store Test</description>
 
 
 	<properties>
@@ -21,10 +21,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

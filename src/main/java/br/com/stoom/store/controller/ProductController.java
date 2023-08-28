@@ -22,7 +22,9 @@ import br.com.stoom.store.business.ProductBO;
 import br.com.stoom.store.controller.swagger.ProductControllerSwagger;
 import br.com.stoom.store.dto.request.ProductFilterRequest;
 import br.com.stoom.store.dto.request.ProductRequest;
+import br.com.stoom.store.dto.request.ProductVariationRequest;
 import br.com.stoom.store.dto.response.ProductResponse;
+import br.com.stoom.store.dto.response.ProductVariationResponse;
 
 @Controller
 @RequestMapping("/api/products")
@@ -104,5 +106,28 @@ public class ProductController implements ProductControllerSwagger {
 	        return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 	
-	
+	@PostMapping("/{productId}/variations")
+	@Override
+	public ResponseEntity<ProductResponse> addVariationToProduct(
+            @PathVariable Long productId,
+            @RequestBody ProductVariationRequest productVariationRequest) {
+		ProductResponse updatedProduct = productService.addVariationToProduct(productId, productVariationRequest);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+    }
+
+    @GetMapping("/{productId}/variations")
+	@Override
+    public ResponseEntity<List<ProductVariationResponse>> getProductVariations(@PathVariable Long productId) {
+        List<ProductVariationResponse> variations = productService.getProductVariations(productId);
+        return ResponseEntity.ok(variations);
+    }
+
+    @DeleteMapping("/{productId}/variations/{variationId}")
+	@Override
+    public ResponseEntity<Void> deleteVariationFromProduct(
+            @PathVariable Long productId,
+            @PathVariable Long variationId) {
+        productService.deleteVariationFromProduct(productId, variationId);
+        return ResponseEntity.noContent().build();
+    }
 }

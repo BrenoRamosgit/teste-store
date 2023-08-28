@@ -11,13 +11,20 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.com.stoom.store.business.interfaces.IBrandBO;
+import br.com.stoom.store.business.interfaces.ICategoryBO;
 import br.com.stoom.store.business.interfaces.IProductBO;
+import br.com.stoom.store.business.interfaces.IProductVariationBO;
 import br.com.stoom.store.dto.request.ProductFilterRequest;
 import br.com.stoom.store.dto.request.ProductRequest;
+import br.com.stoom.store.dto.request.ProductVariationRequest;
 import br.com.stoom.store.dto.response.ProductResponse;
+import br.com.stoom.store.dto.response.ProductVariationResponse;
 import br.com.stoom.store.exception.BaseException;
 import br.com.stoom.store.mapper.ProductMapper;
+import br.com.stoom.store.mapper.ProductVariationMapper;
 import br.com.stoom.store.model.Product;
+import br.com.stoom.store.model.ProductVariation;
 import br.com.stoom.store.repository.ProductRepository;
 import br.com.stoom.store.repository.specification.ProductSpecifications;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +34,12 @@ import lombok.RequiredArgsConstructor;
 public class ProductBO implements IProductBO {
 
 	private final ProductRepository productRepository;
-	private final BrandBO brandService;
-	private final CategoryBO categoryService;
+	private final IBrandBO brandService;
+	private final ICategoryBO categoryService;
+	private final IProductVariationBO productVariationService;
 	private final ProductMapper mapper;
 	private final ProductSpecifications productSpecifications;
+	private final ProductVariationMapper productVariationMapper;
 
 	private Product findById(Long id) {
 		return productRepository.findById(id)
@@ -111,5 +120,33 @@ public class ProductBO implements IProductBO {
 		return mapper.response(products);
 	}
 	
+	
+	@Override
+	@Transactional
+	public ProductResponse addVariationToProduct(Long productId, ProductVariationRequest productVariationRequest) {
+        Product product = findById(productId);
+        ProductVariation productVariation = productVariationMapper.model(productVariationRequest);
+        product.getVariations().add(productVariation);
+        Product updatedProduct = productRepository.save(product);
+        return mapper.response(updatedProduct);
+    }
+
+	@Override
+    public List<ProductVariationResponse> getProductVariations(Long productId) {
+        Product product = findById(productId);
+        List<ProductVariation> variations = product.getVariations();
+        return productVariationMapper.response(variations);
+    }
+
+	@Override
+	@Transactional
+    public void deleteVariationFromProduct(Long productId, Long variationId) {
+        Product product = findById(productId);
+        ProductVariation variation = productVariationService.getProductVariationById(variationId);
+        product.getVariations().remove(variation);
+        productRepository.save(product);
+        productVariationService.delete(variation);
+    }
+
 	
 }

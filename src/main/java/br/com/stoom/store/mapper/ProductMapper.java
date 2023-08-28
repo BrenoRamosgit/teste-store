@@ -18,6 +18,7 @@ public class ProductMapper {
 	private final ModelMapper mapper;
 
 
+
 	public ProductResponse response(Product product) {
 		return mapper.map(product, ProductResponse.class);
 	}
@@ -29,6 +30,7 @@ public class ProductMapper {
 	}
 	
 	public Product model(ProductRequest productRequest) {
+		mapper.getConfiguration().getMatchingStrategy().isExact();
 	    return mapper.map(productRequest, Product.class);
 	}
 	

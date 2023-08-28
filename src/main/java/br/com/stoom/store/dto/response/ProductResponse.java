@@ -28,7 +28,7 @@ public class ProductResponse {
 
 	private BrandResponse brand;
 
-	private PriceResponse price;
+    private List<ProductVariationResponse> variations;
  
 	private Boolean active;
 

@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 
 import br.com.stoom.store.dto.request.ProductFilterRequest;
 import br.com.stoom.store.dto.request.ProductRequest;
+import br.com.stoom.store.dto.request.ProductVariationRequest;
 import br.com.stoom.store.dto.response.ProductResponse;
+import br.com.stoom.store.dto.response.ProductVariationResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -98,6 +100,34 @@ public interface ProductControllerSwagger {
             @ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Void.class)) }, description = "O recurso não foi encontrado") })
 	ResponseEntity<List<ProductResponse>> findAll();
+
+
+    @Operation(summary = "Lista todas as variações do produto", method = "GET")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = ProductResponse.class)) }, description = "Requisição com sucesso"),
+            @ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Void.class)) }, description = "O recurso não foi encontrado") })
+	ResponseEntity<List<ProductVariationResponse>> getProductVariations(Long productId);
+
+
+    @Operation(summary = "Adiciona uma variação ao produto", method = "POST")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = ProductResponse.class)) }, description = "Requisição com sucesso"),
+            @ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Void.class)) }, description = "O recurso não foi encontrado") })
+	ResponseEntity<ProductResponse> addVariationToProduct(Long productId,
+			ProductVariationRequest productVariationRequest);
+
+
+    @Operation(summary = "Deleta variação do produto existente", method = "DELETE")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = ProductResponse.class)) }, description = "Requisição com sucesso"),
+            @ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Void.class)) }, description = "O recurso não foi encontrado") })
+	ResponseEntity<Void> deleteVariationFromProduct(Long productId, Long variationId);
 
     
     

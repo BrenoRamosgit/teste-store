@@ -5,13 +5,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @EnableWebSecurity
+//@Profile("test")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/**")
-            .hasAnyRole("ROLE_ADMIN", "ROLE_USER", "ADMIN_TEST")
+            .antMatchers("/**").permitAll()
             .and()
             .csrf().disable()
             .httpBasic(); 
