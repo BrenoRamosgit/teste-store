@@ -2,18 +2,16 @@ package br.com.stoom.store.dto.request;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Data
 public class ProductRequest {
 
     private String sku;
@@ -25,10 +23,8 @@ public class ProductRequest {
  
     private List<GenericRequest> categories;
 
-    @JsonIgnore
     private GenericRequest brand;
 
-    @JsonIgnore
     private PriceRequest price;
     
 	private Boolean active;

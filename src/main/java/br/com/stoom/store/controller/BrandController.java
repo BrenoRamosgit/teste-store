@@ -28,7 +28,7 @@ public class BrandController implements BrandControllerSwagger {
 
 	private final BrandBO brandService;
 
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<List<BrandResponse>> findAll() {
 		List<BrandResponse> brandResponse = brandService.findAll();
 		if (!brandResponse.isEmpty()) {
@@ -38,7 +38,7 @@ public class BrandController implements BrandControllerSwagger {
 		}
 	}
 
-	@PostMapping("/")
+	@PostMapping
 	@Override
 	public ResponseEntity<BrandResponse> create(@RequestBody BrandRequest request) {
 		BrandResponse brandResponse = brandService.create(request);

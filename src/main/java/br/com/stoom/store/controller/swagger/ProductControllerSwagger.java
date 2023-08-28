@@ -79,7 +79,6 @@ public interface ProductControllerSwagger {
                     schema = @Schema(implementation = ProductResponse.class)) }, description = "Requisição com sucesso"),
             @ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Void.class)) }, description = "O recurso não foi encontrado") })
-    @PageableAsQueryParam
     ResponseEntity<List<ProductResponse>> getProductsByCategory(Long categoryId);
 
     
@@ -89,8 +88,16 @@ public interface ProductControllerSwagger {
                     schema = @Schema(implementation = ProductResponse.class)) }, description = "Requisição com sucesso"),
             @ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Void.class)) }, description = "O recurso não foi encontrado") })
-    @PageableAsQueryParam
     ResponseEntity<List<ProductResponse>> getProductsByBrand(Long categoryId);
+
+
+    @Operation(summary = "Lista todos produtos", method = "GET")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = ProductResponse.class)) }, description = "Requisição com sucesso"),
+            @ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Void.class)) }, description = "O recurso não foi encontrado") })
+	ResponseEntity<List<ProductResponse>> findAll();
 
     
     

@@ -1,5 +1,6 @@
 package br.com.stoom.store.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,20 +17,20 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 @Table(name = "product")
 @Entity
-public class Product {
+public class Product implements Serializable {
 	
-    @Id
+    private static final long serialVersionUID = -4123046099548754532L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_sequence")
     @SequenceGenerator(name = "product_sequence", sequenceName = "PRODUCT_SEQ", allocationSize=1)
     @Column(nullable = false, name = "id")
@@ -45,7 +46,6 @@ public class Product {
     private String description;
 
     
-    //@ManyToOne(fetch = FetchType.LAZY)
 	@ManyToMany
 	@JoinTable(name = "product_category", joinColumns = {
 			@JoinColumn(name = "product_id", nullable = false) }, inverseJoinColumns = {
@@ -56,7 +56,9 @@ public class Product {
     @JoinColumn(name = "brand_id",  referencedColumnName = "id")
     private Brand brand;
 
-    //private Price price;
+   
+   // @Column(name = "price")
+   // private Price price;
 
     @Column(name = "active")
     @Builder.Default

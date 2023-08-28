@@ -1,5 +1,7 @@
 package br.com.stoom.store.dto.response;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -14,14 +16,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
-public class BrandResponse {
+public class PriceResponse {
 
-	private Long id;
-
-	private String name;
-	
-    private String acronym;
-
-	private Boolean active;
-
+    private BigDecimal basePrice;
+    private BigDecimal discountedPrice;
+    
 }

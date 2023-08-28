@@ -2,6 +2,10 @@ package br.com.stoom.store.business.interfaces;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import br.com.stoom.store.dto.request.ProductFilterRequest;
 import br.com.stoom.store.dto.request.ProductRequest;
 import br.com.stoom.store.dto.response.ProductResponse;
 
@@ -22,5 +26,7 @@ public interface IProductBO {
     List<ProductResponse> getProductsByCategory(Long categoryId);
     
 	List<ProductResponse> getProductsByBrand(Long brandId);
+
+	Page<ProductResponse> findProductsByFilters(ProductFilterRequest filter, Pageable pageable);
 
 }

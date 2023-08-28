@@ -2,8 +2,6 @@ package br.com.stoom.store.controller;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,7 +28,7 @@ public class CategoryController implements CategoryControllerSwagger {
 
 	private final CategoryBO categoryService;
 
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<List<CategoryResponse>> findAll() {
 		List<CategoryResponse> categoryResponse = categoryService.findAll();
 		if (!categoryResponse.isEmpty()) {
@@ -40,7 +38,7 @@ public class CategoryController implements CategoryControllerSwagger {
 		}
 	}
 
-	@PostMapping("/")
+	@PostMapping
 	@Override
 	public ResponseEntity<CategoryResponse> create(@RequestBody CategoryRequest request) {
 		CategoryResponse categoryResponse = categoryService.create(request);

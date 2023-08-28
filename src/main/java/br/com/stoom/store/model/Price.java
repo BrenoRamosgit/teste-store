@@ -3,15 +3,16 @@ package br.com.stoom.store.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
-import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-@Table(name = "price")
+//@Table(name = "price")
+@Builder
 //@Entity
 public class Price {
 

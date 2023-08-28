@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 import br.com.stoom.store.dto.request.BrandRequest;
 import br.com.stoom.store.dto.response.BrandResponse;
-import br.com.stoom.store.dto.response.ProductResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

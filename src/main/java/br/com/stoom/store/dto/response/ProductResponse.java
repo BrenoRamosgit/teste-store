@@ -5,15 +5,15 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Builder
 public class ProductResponse {
 
 	private Long id;
@@ -28,6 +28,7 @@ public class ProductResponse {
 
 	private BrandResponse brand;
 
+	private PriceResponse price;
  
 	private Boolean active;
 

@@ -1,5 +1,7 @@
 package br.com.stoom.store.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,20 +12,20 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "brand")
 @Entity
-public class Brand {
+public class Brand implements Serializable{
 	
-    @Id
+    private static final long serialVersionUID = -2638423612546513957L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "brand_sequence")
     @SequenceGenerator(name = "brand_sequence", sequenceName = "BRAND_SEQ",  allocationSize = 1)
     @Column(nullable = false, name = "id")

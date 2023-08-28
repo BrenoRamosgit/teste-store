@@ -32,6 +32,7 @@ public class ProductController implements ProductControllerSwagger {
     private ProductBO productService;
 
     @GetMapping("/")
+    @Override
     public ResponseEntity<List<ProductResponse>> findAll() {
         List<ProductResponse> products = productService.findAll();
         if (!products.isEmpty()) {
@@ -41,7 +42,7 @@ public class ProductController implements ProductControllerSwagger {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping
 	@Override
     public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest request) {
         ProductResponse createdProduct = productService.create(request);
@@ -71,9 +72,13 @@ public class ProductController implements ProductControllerSwagger {
 
     @GetMapping("/page")
     @Override
-	public ResponseEntity<Page<ProductResponse>> list( ProductFilterRequest request, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	public ResponseEntity<Page<ProductResponse>> list( ProductFilterRequest filter, Pageable pageable) {
+    	 Page<ProductResponse> products = productService.findProductsByFilters(filter, pageable);
+         if (products!=null &&  !products.isEmpty()) {
+        	 return new ResponseEntity<>(products, HttpStatus.OK);
+         } else {
+        	 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+         }
 	}
 
 	@PatchMapping("/{productId}/status")
@@ -93,8 +98,11 @@ public class ProductController implements ProductControllerSwagger {
 	
 
 	@GetMapping("/brand/{brandId}")
+	@Override
 	public ResponseEntity<List<ProductResponse>> getProductsByBrand(@PathVariable Long brandId) {
 	    List<ProductResponse> products = productService.getProductsByBrand(brandId);
 	        return new ResponseEntity<>(products, HttpStatus.OK);
 	}
+	
+	
 }
